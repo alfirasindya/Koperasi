@@ -1,0 +1,80 @@
+
+import java.text.DecimalFormat;
+import java.util.Scanner;
+
+class koperasi {
+     double total_pinjaman,tp,bunga,bunga2, total_bunga;
+     String nama;
+     int angsuran2, angsuran, pinjaman;
+         
+     double gettotal_pinjaman (){
+        total_pinjaman=(pinjaman/angsuran2)*angsuran;
+        
+        return total_pinjaman;
+    }
+    
+    double getdapat_bunga (){
+        if (pinjaman <= 300000){
+            bunga2 = 0.05;
+            System.out.println("pinjaman anda mempunyai bunga sebesar 5%");
+        }else if (pinjaman <= 600000){
+            bunga2 = 0.06;
+            System.out.println("pinjaman anda mempunyai bunga sebesar 6%");
+        }else if (pinjaman <= 1000000){
+            bunga2 = 0.07;
+            System.out.println("pinjaman anda mempunyai bunga sebesar 7%");
+        }else if (pinjaman <= 2000000){
+            bunga2 = 0.07;
+            System.out.println("pinjaman anda mempunyai bunga sebesar 7%");
+        }else {
+            bunga2 = 0.09;
+            System.out.println ("pinjaman anda mempunyai bunga sebesar 95");
+        }
+        return bunga2;
+    }     
+    
+    
+    double gettotal_bunga (){
+         total_bunga= gettotal_pinjaman() * getdapat_bunga();
+         total_bunga=gettotal_pinjaman()+total_bunga;
+         return total_bunga;
+    }
+
+    
+    void cetak () {
+        DecimalFormat df = new DecimalFormat ("##0,000");
+        System.out.println("--------------KOPERASI PINJAMAN-----------");
+        System.out.println("nama : "+this.nama);
+        System.out.println("pinjaman berapa : "+this.pinjaman);
+        System.out.println("total angsuran : "+this.angsuran2);
+        System.out.println("angsuran ke- : "+this.angsuran); 
+        System.out.println("------------------------------------------");
+        System.out.println("sisa pinjaman : Rp"+df.format(gettotal_pinjaman ()));
+        System.out.println("------------------------------------------------|");
+        System.out.println("total pinjaman yang harus dilunaskan : Rp"+df.format(gettotal_bunga())+"|");
+        System.out.println("------------------------------------------------|");
+    }
+    
+}
+
+public class MainKoperasipinjaman{
+    public static void main (String [] args) {
+         Scanner input = new Scanner(System.in);
+         koperasi k = new koperasi ();
+         
+        System.out.print("Nama : ");
+        k.nama = input.next();
+        
+        System.out.print("Total pinjaman : ");
+        k.pinjaman = input.nextInt();
+        
+        System.out.print("Angsuran yang diambil : ");
+        k.angsuran2 = input.nextInt();
+        
+        System.out.print("Total angsuran saat ini : ");
+        k.angsuran = input.nextInt();
+        
+        k.cetak();
+    }
+}
+
